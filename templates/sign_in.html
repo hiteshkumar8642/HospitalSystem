@@ -1,0 +1,39 @@
+{% load static  %}
+<link rel="stylesheet" href="{%static 'sign_in.css' %}">
+<center>
+<h2>Login Form</h2>
+</center>
+<div class="center1">
+	<div class="box">
+		<form method="post">
+		{% if messages %}
+			<ul>
+				{% for message in messages %}
+					<li>{{ message }}</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+		<div class="imgcontainer">
+			<img src="{%static '/images/avtar.jpg' %}" alt="Avatar" class="avatar">
+		</div>
+		{% csrf_token %}
+		<div class="container">
+			<label for="uname"><b>Username</b></label>
+			<input type="text" placeholder="Enter Username" name="uname" required>
+
+			<label for="psw"><b>Password</b></label>
+			<input type="password" placeholder="Enter Password" name="password" required>
+
+			<button type="submit">Login</button>
+			
+		</div>
+
+		<div class="container1" style="background-color:#f1f1f1">
+			<a href="{%url 'patient_sign_up'%}"><button type="button" class="cancelbtn" >Patient Sign up</button></a>
+			<a href="{%url 'doctor_sign_up'%}"><button type="button" class="cancelbtn" >Doctor Sign up</button></a>
+		</div>
+
+		</form>
+
+	</div>
+</div>

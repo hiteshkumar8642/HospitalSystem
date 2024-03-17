@@ -1,0 +1,95 @@
+{%extends 'base.html'%}
+{% load static  %}
+{% block head%}
+<link rel="stylesheet" href="{%static 'index.css' %}">
+{% endblock%}
+{% block content%}
+
+	{% if user.patient %}
+	<h1>Patient Data</h1>
+	{% elif user.doctor %}
+	<h1>Doctor Data</h1>
+	{% endif %}
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Pincode</th>
+                <th>Profile Picture</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+					{% if user.patient %}
+                        {{ user.patient.first_name }}
+                    {% elif user.doctor %}
+                        {{ user.doctor.first_name }}
+                    {% endif %}
+				</td>
+                <td>
+					{% if user.patient %}
+                        {{ user.patient.last_name }}
+                    {% elif user.doctor %}
+                        {{ user.doctor.last_name }}
+                    {% endif %}
+				</td>
+                <td>
+                    {% if user.patient %}
+                        {{ user.patient.address_line1 }}
+                    {% elif user.doctor %}
+                        {{ user.doctor.address_line1 }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if user.patient %}
+                        {{ user.patient.city }}
+                    {% elif user.doctor %}
+                        {{ user.doctor.city }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if user.patient %}
+                        {{ user.patient.state }}
+                    {% elif user.doctor %}
+                        {{ user.doctor.state }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if user.patient %}
+                        {{ user.patient.pincode }}
+                    {% elif user.doctor %}
+                        {{ user.doctor.pincode }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if user.patient %}
+                        {% if user.patient.profile_picture %}
+                            <img src="{{ user.patient.profile_picture.url }}" alt="{{ user.username }} Profile Picture" width="100">
+                        {% else %}
+                            No profile picture
+                        {% endif %}
+                    {% elif user.doctor %}
+                        {% if user.doctor.profile_picture %}
+                            <img src="{{ user.doctor.profile_picture.url }}" alt="{{ user.username }} Profile Picture" width="100">
+                        {% else %}
+                            No profile picture
+                        {% endif %}
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+{% endblock %}
